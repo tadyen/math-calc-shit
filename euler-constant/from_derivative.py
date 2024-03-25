@@ -12,8 +12,8 @@
 # thus d/dx {pexp}(x) = ln(a) * pexp(x)
 #
 # in which
-#   pexp(1) = ae = g
-#   d = d/dx {pexp}(1) = ln(a) * g
+#   pexp(x) = ae = g^x
+#   d = d/dx {pexp}(x) = ln(a) * g^x = ln(a) * pexp(x)
 #
 # by definition, ln(a)
 #   < 0 if {a is complex}
@@ -25,11 +25,12 @@
 #   ln(a) between [0, 1] for a in [1, e]
 #   {ln(a) > 1} for {a > e}
 # thus
-#   if d > g, then ln(a) > 1, decrease g
-#   if d < g, then ln(a) < 1, increase g
-#   if d == g, then ln(a) == 1, and thus a == e
+#   if d > pexp(x), then ln(a) > 1, decrease g
+#   if d < pexp(x), then ln(a) < 1, increase g
+#   if d == pexp(x), then ln(a) == 1, and thus a == e
 # strategy:
-#   new_g = g * (g/d)
+#   new_g = g * (pexp(x) / d)
+# using x = 1 gives pexp(x) = ae = g, which is computationally wayyyyyyy better
 
 from typing import Any
 from collections.abc import Callable, Mapping
@@ -49,10 +50,10 @@ def euler_number_from_derivative(tolerance: float, x: float, init_e: float) -> f
   counter: int = 0
 
   def __recurse(counter: int, guess: float) -> float:
-    psuedo_exp = lambda x: guess ** x
-    d = first_principle_derivative( psuedo_exp, x, tolerance )
+    pexp = lambda x: guess ** x
+    d = first_principle_derivative( pexp, x, tolerance )
     assert(d is not None and d is not complex)
-    new_guess = guess * (guess / d)
+    new_guess = guess * (pexp(x) / d)
 
     print(f"Recurse:{counter}, g:{guess}, d:{d}" )
     counter = counter + 1
@@ -65,4 +66,4 @@ def euler_number_from_derivative(tolerance: float, x: float, init_e: float) -> f
   return __recurse(counter, init_e)
 
 if __name__ == "__main__":
-  euler_number_from_derivative(1e-8, 1, 2)
+  euler_number_from_derivative(1e-6, 1, 200)
