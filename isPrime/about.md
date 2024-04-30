@@ -6,9 +6,9 @@ So why am I re-doing this? Just an exercise for myself to actually understand ho
 
 ## implementations
 
-- [isPrime](#isprime)
-- [isPrime2](#isprime2)
-- [isPrimeMemo](#isprimememo)
+- [isPrime](#isprime) - default base typical isPrime
+- [isPrime2](#isprime2) - a failed upgrade (actually a downgrade)
+- [isPrimeMemo](#isprimememo) - remembers which numbers are prime
 
 ## isPrime
 
@@ -95,11 +95,22 @@ def isPrime2(n):
 
 makes sense but it's probably more expensive because;
 
-rather than performing N % 6 == value
+rather than performing N % 7 == some_value or N % 49 == some_value
 
-instead it is testing 6 if 6 isPrime which in this instance is a quick False due to a factor of 2, but for larger non-primes it would get worse unless we record which integers are or aren't prime once tested .... which leads back to the whole Sieve of Aristotles thing and space complexity, but would be good if really testing bigger numbers and not for the 2nd run onwards.
+instead it's running isPrime on 7 or 49, which runs several % operations before it can continue and do the same thing again anyways, or determine 49 isnt prime.
+
+to avoid this, memory is required... which leads back to the whole Sieve of Aristotles thing and space complexity again
+
+Memoisation would be good if testing bigger numbers.
 
 ## isPrimeMemo
 
 same idea as isPrime2 but with memoisation.
 
+We might think the first run is shit, but it's also an algo that performs isPrime on each integer only once, and testing the next integer up does not require testing its sub-integers again.
+
+However a test is still a computation especially with (n ** 0.5) being performed.
+
+one improvisation is to estimate n ** 0.5 as there is no penalty for overshooting that point besides time complexity.
+
+one good estimate with that is to pick a maximal value with half the digits of N, or a minimal number with the amount of digits totalling digits_of_N / 2 + 1
