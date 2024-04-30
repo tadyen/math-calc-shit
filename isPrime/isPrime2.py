@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import sys
 from isPrime import isPrime
-from main import main
+from _main import main
 
 '''
 Attempting to skip integers by recursing its own definition to make it more efficient,

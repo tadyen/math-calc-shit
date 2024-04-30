@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import sys
-from main import main
+from _main import main
 
 def isPrime(n):
   for i in range(2, int(n**0.5)+1):

@@ -4,6 +4,14 @@ isPrime is well known function and is practically curriculum'd.
 
 So why am I re-doing this? Just an exercise for myself to actually understand how it works.
 
+## implementations
+
+- [isPrime](#isprime)
+- [isPrime2](#isprime2)
+- [isPrimeMemo](#isprimememo)
+
+## isPrime
+
 The following is the algo implemented in python:
 
 ``` python
@@ -89,4 +97,9 @@ makes sense but it's probably more expensive because;
 
 rather than performing N % 6 == value
 
-instead it is testing 6 if 6 isPrime which in this instance is a quick False due to a factor of 2, but for larger non-primes it would get worse unless we record which integers are or aren't prime once tested .... which leads back to the whole Sieve of Aristotles thing and space inefficiency, but would be good if really testing bigger numbers and not for the 2nd run onwards.
+instead it is testing 6 if 6 isPrime which in this instance is a quick False due to a factor of 2, but for larger non-primes it would get worse unless we record which integers are or aren't prime once tested .... which leads back to the whole Sieve of Aristotles thing and space complexity, but would be good if really testing bigger numbers and not for the 2nd run onwards.
+
+## isPrimeMemo
+
+same idea as isPrime2 but with memoisation.
+
