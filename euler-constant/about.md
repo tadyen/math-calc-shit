@@ -18,7 +18,7 @@ eg.
 
 Taylor-Maclauren series:
 
-$ e^x = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + ... = \sum^\infty_{n=0}\frac{x^n}{n!}$
+$e^x = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + ... = \sum^\infty_{n=0}\frac{x^n}{n!}$
 
 amongst others
 
