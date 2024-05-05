@@ -1,36 +1,4 @@
-# calculate Euler's number e via its derivative definition
-# e is approx 2.71828
-# The derivative definition is: d[e^x]/dx = e^x
-# in other words, if F(x) = f(x) then f(x) = e^x
-#
-# we make a guess g, around x = 1, such that
-#   g = ae
-# and our psueudo-exp func,
-#   pexp(x) = (ae) ** x
-#
-# since (ae)^x = e ^ (ln(a) * x)
-# thus d/dx {pexp}(x) = ln(a) * pexp(x)
-#
-# in which
-#   pexp(x) = ae = g^x
-#   d = d/dx {pexp}(x) = ln(a) * g^x = ln(a) * pexp(x)
-#
-# by definition, ln(a)
-#   < 0 if {a is complex}
-#   == 0 if {a == 1}
-#   == 1 if {a == e}
-#   > 1 if {a > e}
-# and knowing that e^x is a monotonic increasing function,
-# thus
-#   ln(a) between [0, 1] for a in [1, e]
-#   {ln(a) > 1} for {a > e}
-# thus
-#   if d > pexp(x), then ln(a) > 1, decrease g
-#   if d < pexp(x), then ln(a) < 1, increase g
-#   if d == pexp(x), then ln(a) == 1, and thus a == e
-# strategy:
-#   new_g = g * (pexp(x) / d)
-# using x = 1 gives pexp(x) = ae = g, which is computationally wayyyyyyy better
+# calculate e via its derivative definition recursively
 
 from typing import Any
 from collections.abc import Callable, Mapping
